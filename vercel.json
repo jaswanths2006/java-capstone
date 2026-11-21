@@ -1,4 +1,5 @@
 {
+  "installCommand": "cd AlignLoan-main && npm install",
   "buildCommand": "cd AlignLoan-main && npx expo export -p web",
   "outputDirectory": "AlignLoan-main/dist",
   "cleanUrls": true,
