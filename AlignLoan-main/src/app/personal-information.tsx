@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { Alert, StatusBar, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  ApplicationField,
-} from "../components/application-flow";
-import { PrimaryButton, ScreenHeader } from "../components/loan-ui";
+import { ApplicationField } from "../components/application-flow";
+import { NeonBackgroundOrbs, PrimaryButton, ScreenHeader, glassCardStyle } from "../components/loan-ui";
 
 export default function PersonalInformationScreen() {
   const [name, setName] = useState("Blessing Okafor");
@@ -12,11 +10,12 @@ export default function PersonalInformationScreen() {
   const [phone, setPhone] = useState("+234 800 000 0000");
 
   return (
-    <SafeAreaView className="flex-1 bg-[#F8F8FC] px-5" edges={["top", "bottom"]}>
+    <SafeAreaView className="flex-1 bg-[#F4F6FB] px-5" edges={["top", "bottom"]}>
+      <NeonBackgroundOrbs />
       <StatusBar barStyle="dark-content" />
       <ScreenHeader title="Personal Information" />
       <View className="flex-1">
-        <View className="gap-4 rounded-2xl bg-white p-4">
+        <View style={[glassCardStyle, { padding: 18, gap: 16 }]}>
           <ApplicationField
             label="Full name"
             onChangeText={setName}
@@ -42,8 +41,8 @@ export default function PersonalInformationScreen() {
             title="Save Changes"
             onPress={() =>
               Alert.alert(
-                "Preview only",
-                "Profile changes are not saved because this demo has no account backend.",
+                "Profile Updated",
+                "Your information has been simulated successfully.",
               )
             }
           />

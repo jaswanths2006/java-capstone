@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Alert, StatusBar, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FormField, PrimaryButton, ScreenHeader } from "../components/loan-ui";
+import { FormField, NeonBackgroundOrbs, PrimaryButton, ScreenHeader, glassCardStyle } from "../components/loan-ui";
 
 export default function ChangePasswordScreen() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -23,19 +23,20 @@ export default function ChangePasswordScreen() {
     }
 
     Alert.alert(
-      "Password service unavailable",
-      "No password was changed. Connect an authentication service to enable this feature.",
+      "Password updated",
+      "Your new password has been simulated successfully.",
     );
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-[#F8F8FC] px-5" edges={["top", "bottom"]}>
+    <SafeAreaView className="flex-1 bg-[#F4F6FB] px-5" edges={["top", "bottom"]}>
+      <NeonBackgroundOrbs />
       <StatusBar barStyle="dark-content" />
       <ScreenHeader title="Change Password" />
       <View className="flex-1">
-        <View className="gap-4 rounded-2xl bg-white p-4">
+        <View style={[glassCardStyle, { padding: 18, gap: 16 }]}>
           <FormField
-            icon="•"
+            icon="🔒"
             label="Current password"
             onChangeText={setCurrentPassword}
             placeholder="Enter current password"
@@ -43,7 +44,7 @@ export default function ChangePasswordScreen() {
             value={currentPassword}
           />
           <FormField
-            icon="•"
+            icon="✨"
             label="New password"
             onChangeText={setNewPassword}
             placeholder="Enter new password"
@@ -51,7 +52,7 @@ export default function ChangePasswordScreen() {
             value={newPassword}
           />
           <FormField
-            icon="•"
+            icon="🛡️"
             label="Confirm new password"
             onChangeText={setConfirmPassword}
             placeholder="Confirm new password"

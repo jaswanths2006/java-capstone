@@ -8,6 +8,7 @@ import {
   getApplicationParams,
   type LoanApplicationData,
 } from "../components/application-flow";
+import { glassCardStyle } from "../components/loan-ui";
 
 const purposes = [
   "Business",
@@ -44,9 +45,9 @@ export default function ApplicationFormScreen() {
       subtitle="Tell us a little about the loan you need."
       onContinue={continueToEmployment}
     >
-      <View className="rounded-2xl bg-white p-4">
-        <Text className="text-xs text-[#77758D]">Requested loan amount</Text>
-        <Text className="mt-1 text-lg font-bold text-[#22213D]">
+      <View style={[glassCardStyle, { padding: 18, marginBottom: 4 }]}>
+        <Text className="text-xs font-bold uppercase tracking-wider text-[#64748B]">Requested loan amount</Text>
+        <Text className="mt-1 text-2xl font-black text-[#0F172A]">
           ₦{new Intl.NumberFormat("en-NG").format(amount)}
         </Text>
       </View>

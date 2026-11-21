@@ -1,20 +1,21 @@
 import { router } from "expo-router";
 import { Pressable, ScrollView, StatusBar, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { PrimaryButton, ScreenHeader } from "../components/loan-ui";
+import { NeonBackgroundOrbs, PrimaryButton, ScreenHeader, glassCardStyle } from "../components/loan-ui";
 
 function DetailRow({ label, value }: { label: string; value: string }) {
   return (
-    <View className="flex-row justify-between border-b border-[#F0EFF5] py-3">
+    <View className="flex-row justify-between border-b border-[#F0EFF5]/60 py-3">
       <Text className="text-sm text-[#77758D]">{label}</Text>
-      <Text className="text-sm font-semibold text-[#34334C]">{value}</Text>
+      <Text className="text-sm font-semibold text-[#0F172A]">{value}</Text>
     </View>
   );
 }
 
 export default function LoanDetailsScreen() {
   return (
-    <SafeAreaView className="flex-1 bg-[#F8F8FC] px-5" edges={["top", "bottom"]}>
+    <SafeAreaView className="flex-1 bg-[#F4F6FB] px-5" edges={["top", "bottom"]}>
+      <NeonBackgroundOrbs />
       <StatusBar barStyle="dark-content" />
       <ScreenHeader title="Loan Details" />
       <ScrollView
@@ -22,26 +23,55 @@ export default function LoanDetailsScreen() {
         contentContainerClassName="pb-8"
         showsVerticalScrollIndicator={false}
       >
-        <View className="mb-4 rounded-xl bg-[#E8F5E9] p-3">
-          <Text className="text-xs leading-5 text-[#0B6623]">
-            Sample loan preview. No loan has been approved or disbursed.
+        <View
+          style={{
+            backgroundColor: "rgba(0, 255, 135, 0.12)",
+            borderColor: "rgba(0, 255, 135, 0.35)",
+            borderWidth: 1,
+            borderRadius: 16,
+            padding: 12,
+            marginBottom: 16,
+          }}
+        >
+          <Text className="text-xs font-semibold leading-5 text-[#059669]">
+            ⚡ Live demo preview. No loan has been approved or disbursed.
           </Text>
         </View>
 
-        <View className="rounded-3xl bg-[#0B6623] p-5">
-          <Text className="text-sm font-medium text-green-100">
-            Preview loan amount
+        {/* Cyber Neon Hero Card */}
+        <View
+          style={{
+            background: "linear-gradient(135deg, #022c22 0%, #064e3b 50%, #0f172a 100%)",
+            borderRadius: 24,
+            padding: 22,
+            borderWidth: 1,
+            borderColor: "rgba(0, 255, 135, 0.4)",
+            boxShadow: "0 10px 30px rgba(0, 255, 135, 0.18)",
+          }}
+        >
+          <Text className="text-xs font-bold uppercase tracking-wider text-[#00FF87]">
+            Active Preview Limit
           </Text>
           <Text className="mt-2 text-3xl font-extrabold text-white">₦300,000</Text>
-          <View className="mt-4 self-start rounded-full bg-white/15 px-3 py-1">
-            <Text className="text-xs font-semibold text-white">Preview only</Text>
+          <View
+            style={{
+              marginTop: 14,
+              alignSelf: "flex-start",
+              borderRadius: 9999,
+              backgroundColor: "rgba(0, 255, 135, 0.2)",
+              paddingHorizontal: 12,
+              paddingVertical: 4,
+              borderWidth: 1,
+              borderColor: "rgba(0, 255, 135, 0.5)",
+            }}
+          >
+            <Text className="text-xs font-bold text-[#00FF87]">● Preview Active</Text>
           </View>
         </View>
 
-        <View className="mt-4 rounded-2xl bg-white px-4">
-          <Text className="pt-4 text-base font-bold text-[#34334C]">
-            Loan summary
-          </Text>
+        {/* Glass Loan Summary */}
+        <View style={[glassCardStyle, { marginTop: 16, padding: 16 }]}>
+          <Text className="text-base font-bold text-[#0F172A]">Loan Summary</Text>
           <DetailRow label="Loan amount" value="₦300,000" />
           <DetailRow label="Monthly installment" value="₦56,000" />
           <DetailRow label="Repayment term" value="6 months" />
@@ -49,18 +79,27 @@ export default function LoanDetailsScreen() {
           <DetailRow label="Status" value="Demo preview" />
         </View>
 
+        {/* Glass Schedule Link */}
         <Pressable
           accessibilityRole="button"
-          className="mt-4 flex-row items-center rounded-2xl bg-white p-4"
+          style={[glassCardStyle, { marginTop: 14, padding: 16, flexDirection: "row", alignItems: "center" }]}
           onPress={() => router.push("/repayment-history")}
         >
-          <View className="mr-3 h-10 w-10 items-center justify-center rounded-xl bg-[#E8F5E9]">
-            <Text className="text-lg font-bold text-[#0B6623]">↻</Text>
+          <View
+            style={{
+              width: 42,
+              height: 42,
+              borderRadius: 14,
+              backgroundColor: "rgba(0, 245, 255, 0.15)",
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: 14,
+            }}
+          >
+            <Text className="text-lg font-bold text-[#00F5FF]">↻</Text>
           </View>
-          <Text className="flex-1 font-semibold text-[#34334C]">
-            Repayment schedule
-          </Text>
-          <Text className="text-xl text-[#9997AA]">›</Text>
+          <Text className="flex-1 font-bold text-[#0F172A]">Repayment schedule</Text>
+          <Text className="text-xl text-[#94A3B8]">›</Text>
         </Pressable>
 
         <View className="mt-6">
@@ -71,10 +110,19 @@ export default function LoanDetailsScreen() {
         </View>
         <Pressable
           accessibilityRole="button"
-          className="mt-4 h-12 items-center justify-center rounded-2xl border border-[#DAD7F6] bg-white"
+          style={{
+            marginTop: 14,
+            height: 48,
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 16,
+            borderWidth: 1.5,
+            borderColor: "rgba(0, 255, 135, 0.4)",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+          }}
           onPress={() => router.push("/repayment")}
         >
-          <Text className="font-bold text-[#5B45E7]">Explore repayment options</Text>
+          <Text className="font-bold text-[#059669]">Explore repayment options</Text>
         </Pressable>
       </ScrollView>
     </SafeAreaView>

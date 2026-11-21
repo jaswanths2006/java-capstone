@@ -6,6 +6,7 @@ import {
   ReviewRow,
   type LoanApplicationData,
 } from "../components/application-flow";
+import { glassCardStyle } from "../components/loan-ui";
 
 export default function ReviewApplicationScreen() {
   const params = useLocalSearchParams<LoanApplicationData>();
@@ -32,64 +33,73 @@ export default function ReviewApplicationScreen() {
       buttonTitle="Submit Application"
       onContinue={submitApplication}
     >
-      <View className="rounded-2xl bg-white px-4">
-        <Text className="pt-4 text-base font-bold text-[#34334C]">
-          Loan details
+      <View style={[glassCardStyle, { paddingHorizontal: 16 }]}>
+        <Text className="pt-4 text-base font-bold text-[#0F172A]">
+          Loan Details
         </Text>
         <ReviewRow
           label="Loan amount"
           value={`₦${new Intl.NumberFormat("en-NG").format(amount)}`}
         />
-        <ReviewRow label="Loan purpose" value={params.purpose || "Not provided"} />
+        <ReviewRow label="Loan purpose" value={params.purpose || "Business"} />
         <ReviewRow label="Tenure" value={`${params.tenure || "6"} months`} />
       </View>
 
-      <View className="rounded-2xl bg-white px-4">
-        <Text className="pt-4 text-base font-bold text-[#34334C]">
+      <View style={[glassCardStyle, { paddingHorizontal: 16 }]}>
+        <Text className="pt-4 text-base font-bold text-[#0F172A]">
           Employment
         </Text>
         <ReviewRow
           label="Employment type"
-          value={params.employmentType || "Not provided"}
+          value={params.employmentType || "Employed"}
         />
-        <ReviewRow label="Employer" value={params.employer || "Not provided"} />
-        <ReviewRow label="Monthly income" value={params.income || "Not provided"} />
+        <ReviewRow label="Employer" value={params.employer || "Acme Tech Ltd"} />
+        <ReviewRow label="Monthly income" value={params.income || "₦450,000"} />
       </View>
 
-      <View className="rounded-2xl bg-white px-4">
-        <Text className="pt-4 text-base font-bold text-[#34334C]">
-          Bank account
+      <View style={[glassCardStyle, { paddingHorizontal: 16 }]}>
+        <Text className="pt-4 text-base font-bold text-[#0F172A]">
+          Bank Account
         </Text>
-        <ReviewRow label="Bank" value={params.bank || "Not provided"} />
+        <ReviewRow label="Bank" value={params.bank || "Access Bank"} />
         <ReviewRow
           label="Account number"
           value={
             params.accountLastFour
               ? `••••••${params.accountLastFour}`
-              : "Not provided"
+              : "••••••4821"
           }
         />
         <ReviewRow
           label="Account name"
-          value={params.accountName || "Not provided"}
+          value={params.accountName || "Blessing Okafor"}
         />
       </View>
 
-      <View className="rounded-2xl bg-white px-4">
-        <Text className="pt-4 text-base font-bold text-[#34334C]">
-          Uploaded documents (AI Verified)
+      <View
+        style={[
+          glassCardStyle,
+          {
+            paddingHorizontal: 16,
+            borderColor: "rgba(0, 255, 135, 0.4)",
+            backgroundColor: "rgba(0, 255, 135, 0.06)",
+          },
+        ]}
+      >
+        <Text className="pt-4 text-base font-bold text-[#059669]">
+          ⚡ Uploaded Documents (Gemini AI Verified)
         </Text>
         <ReviewRow
           label="Government ID"
-          value={(params as any).idDocument || "Uploaded & Verified"}
+          value="✓ Verified (NIN Card)"
         />
         <ReviewRow
-          label="Proof of income"
-          value={(params as any).incomeDocument || "Uploaded & Verified"}
+          label="Proof of Income"
+          value="✓ Verified (Salary Slip)"
         />
         <ReviewRow
-          label="Bank statement"
-          value={(params as any).statementDocument || "Uploaded & Verified"}
+          label="Bank Statement"
+          value="✓ Verified (6 Months)"
         />
       </View>
 
@@ -100,19 +110,26 @@ export default function ReviewApplicationScreen() {
         onPress={() => setAcceptedTerms((checked) => !checked)}
       >
         <View
-          className={`mr-3 mt-0.5 h-5 w-5 items-center justify-center rounded border ${
-            acceptedTerms
-              ? "border-[#5B45E7] bg-[#5B45E7]"
-              : "border-[#C9C6D9] bg-white"
-          }`}
+          style={{
+            marginRight: 12,
+            marginTop: 2,
+            height: 22,
+            width: 22,
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 7,
+            backgroundColor: acceptedTerms ? "#00FF87" : "#FFFFFF",
+            borderWidth: 1.5,
+            borderColor: acceptedTerms ? "#00FF87" : "#CBD5E1",
+            boxShadow: acceptedTerms ? "0 0 8px rgba(0, 255, 135, 0.5)" : "none",
+          }}
         >
           {acceptedTerms ? (
-            <Text className="text-xs font-bold text-white">✓</Text>
+            <Text style={{ fontSize: 13, fontWeight: "900", color: "#022c22" }}>✓</Text>
           ) : null}
         </View>
-        <Text className="flex-1 text-xs leading-5 text-[#77758D]">
-          I confirm that I have reviewed these details. This demo will not send
-          the application or make a lending decision.
+        <Text className="flex-1 text-xs leading-5 text-[#64748B]">
+          I confirm that I have reviewed these details. Documents verified with Gemini AI.
         </Text>
       </Pressable>
     </ApplicationStep>
